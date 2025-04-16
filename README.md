@@ -59,3 +59,70 @@ https://modelcontextprotocol.io/introduction
 
 다양한 문맥(context) 정보를 동적으로 구성하고 관리할 수 있게 해주는 컨텍스트 설계/통신 프로토콜
 
+SSE(Server Sent Events)
+
+JSON-RPC + HTTP
+
+웹 서버가 웹 브라우저(클라이언트)에게 자동으로 데이터를 푸시하여 업데이트를 보낼 수 있게 하는 표준 웹 기술(서버에서 클라이언트로 단방향 통신)
+
+서버의 데이터 변경 사항을 클라이언트가 알기 위해 주기적으로 서버에 요청을 보내 확인하는 방식(Polling)의 단점(지연시간, 서버부하, 네트워크 자원 낭비)
+서버에 새로운 데이터가 발생했을 때 서버가 즉시 클라이언트에게 데이터를 밀어주는(push) 방식을 표준화하기 위해 등장
+LLM 응답을 한 줄씩 차례대로 보여줄 때 자주 쓰임
+
+HTTP 기반
+웹소켓과 비교
+
+JSON-RPC(JavaScript Object Notation-Remote Procedure Call)
+
+JSON 포맷을 이용한 원격 프로시저 호출(Remote Procedure Call) 프로토콜
+ 
+클라이언트가 네트워크를 통해 서버에 원격 함수 호출을 요청, 서버가 그 결과를 다시 JSON 형식으로 응답하는 구조
+
+RPC (원격 프로시저 호출): 네트워크로 연결된 다른 컴퓨터(다른 주소 공간)에 있는 함수(프로시저, 메서드)를 마치 로컬 함수처럼 호출할 수 있게 하는 기술(발자는 복잡한 네트워크 통신 과정을 직접 구현하지 않고도 원격의 기능을 사용할 수 있음)
+
+상태를 저장하지 않으며(stateless), 구현이 매우 단순하고, HTTP, WebSocket, 소켓 등 다양한 전송 방식과 독립적으로 사용할 수 있음
+
+HTTP 기반(클라이언트가 요청, 서버가 응답) 또는 WebSocket 기반(양쪽 모두 호출 가능)으로 구현 가능
+
+프론트 ↔ 백엔드 ↔ LLM ↔ 툴 구조
+
+### 통신 예제 
+
+1. UI(웹 브라우저): "서울 날씨 알려줘" 입력
+2. LLM 추론: LLM은 날씨 get_weather 툴을 {"city": "서울"} 파라미터로 호출해야 한다고 응답
+3. 툴 호출
+```json
+{
+  "jsonrpc": "2.0",
+  "method": "get_weather",
+  "params": { "city": "서울" },
+  "id": "weather-req-001"
+}
+```
+4. 툴 실행
+```json
+{
+  "jsonrpc": "2.0",
+  "result": { "condition": "맑음", "temperature": 15, "unit": "C" },
+  "id": "weather-req-001"
+}
+```
+5. 결과 처리/최종 응답 생성: 날씨 정보는 '맑음, 15°C' 임. 사용자에게 자연스러운 문장으로 답변 생성해줘 -> 최종 응답 텍스트 생성: 서울의 현재 날씨는 맑음이며, 기온은 15°C입니다. 
+6. 최종 응답: UI와 연결된 SSE 커넥션(Content-Type: text/event-stream)을 통해 LLM이 생성한 답변을 작은 조각(청크)으로 나누어 스트리밍 전송.
+```
+# 첫 번째 조각
+event: message
+id: chunk-1
+data: {"text": "서울의 "}
+
+# 두 번째 조각
+event: message
+id: chunk-2
+data: {"text": "현재 날씨는 "}
+...
+```
+7. (UI)결과 표시
+
+
+
+
