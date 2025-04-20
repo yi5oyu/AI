@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: client
+  ai:
+    openai:
+      api-key: ${OPENAI_API_KEY}
+      chat:
+        options:
+          model: gpt-4o
+    mcp.client:
+      toolcallback:
+        enabled: true
+      sse:
+        connections:
+          mcp-server:
+            url: http://localhost:8086
+
+server.port: 8085
