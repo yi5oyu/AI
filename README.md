@@ -154,6 +154,7 @@ data: {"text": "현재 날씨는 "}
 ```
 7. (UI)결과 표시
 
+<img width="161" alt="{A54248C9-99B2-42FD-B4C7-2B9992027FB9}" src="https://github.com/user-attachments/assets/fc87df64-7beb-44ed-94d6-17c48476c9ad" />
 
 
 <img width="500" alt="{D82532EB-1FE7-40D6-9EBD-D47F5F91D1F6}" src="https://github.com/user-attachments/assets/45408e6b-b23e-4c0c-97f0-6a0ae8de00c2" />
