@@ -157,3 +157,11 @@ data: {"text": "현재 날씨는 "}
 
 
 <img width="500" alt="{D82532EB-1FE7-40D6-9EBD-D47F5F91D1F6}" src="https://github.com/user-attachments/assets/45408e6b-b23e-4c0c-97f0-6a0ae8de00c2" />
+
+
+<img width="431" alt="{F7E684EC-9B08-4CF1-975E-46ACD32BAD2B}" src="https://github.com/user-attachments/assets/0f0ded15-031b-45d6-a302-ff472571c7ac" />
+<img width="479" alt="{104298F9-BF7E-4B8F-9CBD-FA1C36BD329D}" src="https://github.com/user-attachments/assets/1a1e552f-027c-404d-a734-464a51ecef62" />
+<img width="304" alt="{1902499D-1F60-4888-BB6F-325F0AA51B3B}" src="https://github.com/user-attachments/assets/3df56015-fb0f-4cb2-9b63-48ea8a57d8f2" />
+
+
+
