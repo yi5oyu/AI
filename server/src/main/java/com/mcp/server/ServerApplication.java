@@ -10,4 +10,11 @@ public class ServerApplication {
 		SpringApplication.run(ServerApplication.class, args);
 	}
 
+//	@Bean
+//	public ToolCallbackProvider tools(TestTool testTool) {
+//		return MethodToolCallbackProvider.builder()
+//			.toolObjects(testTool)
+//			.build();
+//	}
+
 }

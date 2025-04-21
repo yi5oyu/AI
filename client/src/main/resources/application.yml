@@ -14,5 +14,7 @@ spring:
         connections:
           mcp-server:
             url: http://localhost:8086
+#          py-mcp-server:
+#            url: http://localhost:8088
 
 server.port: 8085
