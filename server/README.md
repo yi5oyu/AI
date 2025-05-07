@@ -1,28 +1,31 @@
-build.gradle
+```
+# build.gradle
 
 repositories {
-mavenCentral()
+  mavenCentral()
 }
 
 ext {
-set('springAiVersion', "1.0.0-M7")
+  set('springAiVersion', "1.0.0-M7")
 }
 
 dependencies {
-implementation 'org.springframework.ai:spring-ai-starter-mcp-server-webmvc'
-compileOnly 'org.projectlombok:lombok'
-annotationProcessor 'org.projectlombok:lombok'
-testImplementation 'org.springframework.boot:spring-boot-starter-test'
-testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+  implementation 'org.springframework.ai:spring-ai-starter-mcp-server-webmvc'
+  compileOnly 'org.projectlombok:lombok'
+  annotationProcessor 'org.projectlombok:lombok'
+  testImplementation 'org.springframework.boot:spring-boot-starter-test'
+  testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 dependencyManagement {
-imports {
-mavenBom "org.springframework.ai:spring-ai-bom:${springAiVersion}"
+  imports {
+  mavenBom "org.springframework.ai:spring-ai-bom:${springAiVersion}"
+  }
 }
-}
+```
 
-application.yml
+``` yml
+# application.yml
 
 spring:
   application:
@@ -33,6 +36,7 @@ spring:
     enabled: true
 
 server.port: 8086
+```
 
 https://github.com/modelcontextprotocol/inspector
 
