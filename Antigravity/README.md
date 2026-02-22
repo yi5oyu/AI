@@ -1,5 +1,28 @@
 # Antigravity
 
+```
+.gemini/
+├── GEMINI.md                            # 에이전트 전역 규칙
+├── 📁 antigravity
+│   ├── 📁 skills                        # 스킬
+│   └── 📁 ...
+├── 📁 antigravity-browser-profile
+│   └── 📁 ...                    
+└── 📁 rules                             # 세부 지침
+    └── code-style.md                    # 코딩 컨벤션 관련 파일 관리  
+
+project(root)/                           # 프로젝트 루트
+├── GEMINI.md                            # 프로젝트 기술 스택/핵심 규칙
+├── HANDOFF.md                           # 현재 작업 상태/세션 간 인수인계서
+├── .agents/                                
+│   ├── 📁 rules/                        # 프로젝트 규칙
+│   |   └── ....md             
+│   └── 📁 workflows/                    # 워크플로우 규칙
+│       └── ....md 
+└── 📁 docs/                             # 세부 참조 문서
+    ├── prd.md                 
+    └── git-settings.md        
+```
 
 ## Agent
 
@@ -86,3 +109,5 @@ k6 같은 부하 테스트 스크립트를 먼저 작성해 에이전트가 스�
 ```
 결과물을 곧바로 적용하지말고 AI 스스로 결과물을 의심하게 만듬
 ```
+
+## Agent Manager
