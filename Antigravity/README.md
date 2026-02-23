@@ -1,5 +1,12 @@
 # Antigravity
 
+`환경설정`
+
+- 플러그인
+  - Antigravity Quota (AGQ)
+- 크롬 Extension
+  - Antigravity Browser Extension
+
 ```
 .gemini/
 ├── GEMINI.md                            # 에이전트 전역 규칙
