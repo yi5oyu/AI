@@ -1,6 +1,6 @@
 ---
 name: spring-rest-api-impl
-description: Implements RESTful API endpoints focusing on business logic in a Spring Boot environment. Generates code that adheres to the single responsibility principle by clearly separating the 3-tier architecture (Controller, Service, Repository) and mapping DTOs.
+description: Use to implement Spring Boot RESTful APIs with 3-tier architecture (Controller, Service, Repository) and DTO mapping.
 # argument-hint: "[Domain name to implement and major requirements (e.g., Markdown document creation API)]"
 source: "custom"
 tags: ["java", "spring-boot", "rest-api", "backend"]
