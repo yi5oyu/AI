@@ -1,6 +1,6 @@
 ---
 name: spring-rest-api-impl
-description: Spring Boot 환경에서 비즈니스 로직에 집중하여 RESTful API 엔드포인트를 구현합니다. Controller, Service, Repository의 명확한 3계층 분리와 DTO 매핑을 수행하여 단일 책임 원칙을 준수하는 코드를 생성합니다.
+description: Spring Boot 기반 RESTful API (Controller, Service, Repository) 생성 및 DTO 매핑 코드를 구현할 때 사용
 # argument-hint: "[구현할 도메인 이름 및 주요 요구사항 (예: 마크다운 문서 생성 API)]"
 source: "custom"
 tags: ["java", "spring-boot", "rest-api", "backend"]
@@ -97,3 +97,4 @@ public class DocumentController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 }
+```
