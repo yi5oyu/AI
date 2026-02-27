@@ -71,7 +71,6 @@ rules:
   - "모든 DTO는 Java Record를 사용함"
   - "예외 처리는 RFC 9457(Problem Details) 표준을 준수함"
 rules_path: "./rules/convention.md"
-
 ---
 
 2. SKILL.md Body (Markdown)
