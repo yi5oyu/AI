@@ -13,8 +13,8 @@
 `모든 스킬은 YAML 프런트매터(frontmatter)가 포함된 SKILL.md 파일이 필요`
 
 ```
-https://code.claude.com/docs/ko/skills
-https://geminicli.com/docs/cli/creating-skills
+https://agentskills.io
+
 https://github.com/forrestchang/andrej-karpathy-skills
 https://github.com/sickn33/antigravity-awesome-skills
 ```
