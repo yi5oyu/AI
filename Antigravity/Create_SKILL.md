@@ -12,6 +12,13 @@
 
 `모든 스킬은 YAML 프런트매터(frontmatter)가 포함된 SKILL.md 파일이 필요`
 
+```
+https://code.claude.com/docs/ko/skills
+https://geminicli.com/docs/cli/creating-skills
+https://github.com/forrestchang/andrej-karpathy-skills
+https://github.com/sickn33/antigravity-awesome-skills
+```
+
 - 레벨 1: SKILL.md 메타데이터 (YAML frontmatter) 100 토큰 이내 작성 [항상 실행됨]
   - YAML 프런트매터(frontmatter): 에이전트가 스킬을 검색하기 위한 인덱스 (사용자 요청에 따라 description을 읽고 판단)
 - 레벨 2: SKILL.md Body (Markdown) 5000 토큰 이내 작성 [스킬 트리거되면 실행]
