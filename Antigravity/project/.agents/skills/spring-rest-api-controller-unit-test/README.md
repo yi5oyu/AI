@@ -1,6 +1,6 @@
 ---
 name: spring-rest-api-controller-unit-test
-description: @WebMvcTest와 Mockito를 활용하여 Spring Boot REST API 컨트롤러의 웹 계층 단위 테스트(Unit Test)를 BDD 패턴으로 작성합니다.
+description: WebMvcTest와 Mockito를 활용하여 Spring Boot REST API 컨트롤러의 웹 계층 단위 테스트(Unit Test)를 BDD 패턴으로 작성합니다.
 argument-hint: "[테스트할 대상 API 컨트롤러 및 특정 시나리오 (예: DocumentController 게시글 생성 201 성공 및 400 실패 단위 테스트)]"
 source: "custom"
 tags: ["java", "spring-boot", "testing", "junit5", "mockito", "rest-api", "webmvctest"]
