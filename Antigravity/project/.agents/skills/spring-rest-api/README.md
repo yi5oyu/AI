@@ -129,6 +129,6 @@ public class DocumentController {
 
 ## Related Skills
 
-* `spring-jpa-entity-design`: API를 구현하기 전, 기초가 되는 데이터베이스 스키마와 엔티티를 설계할 때 먼저 사용합니다.
+* `spring-boot-jpa-entity`: API를 구현하기 전, 기초가 되는 데이터베이스 스키마와 엔티티를 설계할 때 먼저 사용합니다.
 * `spring-boot-querydsl`: 복잡한 검색 조건이나 페이징 처리가 필요할 때 Service 계층에 주입하여 사용합니다.
 * `spring-rest-api-exception-handler`: 컨트롤러 로직 밖에서 발생하는 유효성 검사 실패(`@Valid`)나 비즈니스 예외를 전역적으로 처리하고 일관된 에러 응답 DTO를 반환할 때 사용합니다.
