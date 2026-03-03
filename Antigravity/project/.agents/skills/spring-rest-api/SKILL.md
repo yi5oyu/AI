@@ -1,9 +1,9 @@
 ---
 name: spring-rest-api
-description: Implement robust Spring Boot RESTful APIs utilizing a 3-tier architecture (Controller, Service, Repository) and the latest Spring Boot 4.x+ specifications.
+description: Implement RESTful APIs utilizing a 3-Tier architecture (Controller, Service, Repository) and the latest Spring Boot specifications (Java Records, Jakarta Validation).
 argument-hint: "[API를 만들 대상 도메인, 엔드포인트 목적 (예: 사용자 생성 API, 게시글 목록 조회 API)]"
 source: "custom"
-tags: ["java", "spring-boot", "rest-api", "backend"]
+tags: ["java", "spring-boot", "rest-api", "backend", "architecture"]
 triggers:
   - "REST API 만들어"
   - "신규 API 엔드포인트 추가"
@@ -16,57 +16,69 @@ Detailed guidelines for implementing robust and optimized backend APIs.
 ## Overview
 
 - Use when building RESTful API endpoints and core business logic for a new domain from scratch.
-- Useful for quickly scaffolding and implementing stable 3-tier architecture backend code to communicate with frontends or clients.
-- Actively utilizes the latest Spring Boot 4.x+ specifications (Native Versioning, Record-based DTOs, etc.).
+- Useful for quickly scaffolding and implementing backend code based on a stable 3-Tier architecture to communicate with clients.
+- Actively utilizes Java `Record`-based immutable DTOs and `jakarta.validation`.
 
 ## When to Use This Skill
 
-- When creating CRUD APIs to manipulate data after the database tables (Entities) have been designed.
-- When adding new features that require receiving external requests, validating them, executing specific business logic, and returning a response.
-- When refactoring by separating complex logic from controllers into the Service layer.
+- When creating CRUD APIs to manipulate data after the database table (Entity) design is complete.
+- When adding a new feature that receives external requests, validates them, performs specific business logic, and returns a response.
+- When refactoring existing complex logic by separating it into the Service layer.
 
 ## How It Works
 
-### Step 1: [Define DTOs]
-Create the Request DTO and Response DTO as Java `Record` classes. For input validation, you MUST strictly use annotations from the `jakarta.validation.constraints.*` package (e.g., `@NotBlank`, `@NotNull`); the use of the `javax.*` package is strictly prohibited.
+### Step 1: Define DTOs (Records)
 
-### Step 2: [Implement Repository]
-Create an interface extending Spring Data JPA's `JpaRepository`. Define custom query methods only when complex data retrieval beyond standard CRUD operations is required.
+Create Request DTOs to receive client inputs and Response DTOs to return outputs as Java `Record` classes.
+- When validating input values, strictly use annotations from the `jakarta.validation.constraints.*` package (e.g., `@NotBlank`, `@NotNull`). **Never use the `javax.*` package.**
 
-### Step 3: [Implement Service]
-Use the `@Service` annotation and implement business logic by injecting the Repository via constructor injection (`@RequiredArgsConstructor`).
-- Apply `@Transactional(readOnly = true)` at the class level to optimize performance, and override it with `@Transactional` only on methods that modify data (Create, Update, Delete).
-- Always use static factory methods inside DTOs (e.g., `from()`) for Entity-to-DTO conversion. Use standard Java exceptions (e.g., `IllegalArgumentException`) instead of creating arbitrary custom exceptions unnecessarily.
+### Step 2: Implement Repository
 
-### Step 4: [Implement Controller]
-Set up routing using `@RestController` and `@RequestMapping`. Use constructor injection.
-- **Apply Spring Boot 4.x Native API Versioning by strictly utilizing the `version` attribute in mapping annotations (e.g., `@PostMapping(version = "1")`).**
-- Always return a standard `ResponseEntity<T>` with a clear HTTP status code. Upon successful creation (`POST`), you should aim to return a `201 CREATED` status along with the URI of the newly created resource in the `Location` header.
+Create an interface extending Spring Data JPA's `JpaRepository`. Define custom query methods or utilize QueryDSL interfaces only when complex data retrieval is required beyond standard CRUD operations.
+
+### Step 3: Implement Service
+
+Write business logic using the `@Service` annotation and inject the Repository via constructor injection (`@RequiredArgsConstructor`).
+- Optimize performance by applying `@Transactional(readOnly = true)` at the class level, and override with `@Transactional` only on methods that modify data (Create, Update, Delete).
+- Conversion logic between Entities and DTOs must use static factory methods (e.g., `from()`) inside the DTO.
+- In case of business exceptions, utilize standard exceptions (e.g., `IllegalArgumentException`) or domain-specific business exceptions instead of indiscriminate custom exceptions.
+
+### Step 4: Implement Controller
+
+Configure routing using `@RestController` and `@RequestMapping`.
+- **API Versioning:** Standardize API versioning by including an explicit version URI at the class-level `@RequestMapping` (e.g., `/api/v1/...`).
+- **RESTful Responses:** Always return standard `ResponseEntity<T>` with clear HTTP status codes.
+- Upon successful creation (`POST`), you must return a `201 CREATED` status code along with the access URI of the created resource in the `Location` header.
 
 ## Examples
 
 ```java
 // 1. DTO
 public record DocumentCreateRequest(
-    @NotBlank String title,
-    @NotBlank String content
+    @NotBlank(message = "Title is required.") String title,
+    @NotBlank(message = "Content is required.") String content
 ) {}
 
 public record DocumentResponse(
-    @NonNull Long id,
+    @NotNull Long id,
     @NotBlank String title,
     @NotBlank String content
 ) {
     public static DocumentResponse from(Document document) {
-        return new DocumentResponse(document.getId(), document.getTitle(), document.getContent());
+        return new DocumentResponse(
+            document.getId(), 
+            document.getTitle(), 
+            document.getContent()
+        );
     }
 }
 
 // 2. Service
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true) // Default to read-only for performance
+@Transactional(readOnly = true) // Default to read-only
 public class DocumentService {
+    
     private final DocumentRepository documentRepository;
 
     @Transactional // Override for write operations
@@ -83,19 +95,19 @@ public class DocumentService {
 
 // 3. Controller
 @RestController
-@RequestMapping("/api/documents")
+@RequestMapping("/api/v1/documents") // URI-based standard versioning
 @RequiredArgsConstructor
 public class DocumentController {
+    
     private final DocumentService documentService;
 
-    // Apply Spring Boot 4.x Native API Versioning
-    @PostMapping(version = "1") 
-    public ResponseEntity<DocumentResponse> createDocumentV1(@Valid @RequestBody DocumentCreateRequest request) {
+    @PostMapping
+    public ResponseEntity<DocumentResponse> createDocument(@Valid @RequestBody DocumentCreateRequest request) {
         DocumentResponse response = documentService.createDocument(request);
         
-        // RESTful 201 Created standard (including Location header)
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}")
+        // RESTful 201 Created standard (Includes Location header)
+        URI location = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/api/v1/documents/{id}")
                 .buildAndExpand(response.id())
                 .toUri();
                 
@@ -107,15 +119,16 @@ public class DocumentController {
 
 ## Best Practices
 
-* **Single Responsibility Principle:** The Controller should only handle HTTP requests/responses and routing. Data processing and business logic must be handled in the Service layer.
-* **Immutability:** Ensure immutability and minimize boilerplate code by using `Record` classes for data transfer objects.
+* **Adhere to the Single Responsibility Principle (SRP):** The Controller should only handle HTTP requests/responses and routing. Data processing and business logic must be executed in the Service layer.
+* **Immutable Object Orientation:** Ensure immutability and minimize boilerplate code by using Records for Data Transfer Objects.
 
 ## Common Pitfalls
 
-* **Returning Entities Directly:** Returning JPA Entities directly from the Controller causes severe side effects, such as runtime errors due to Lazy Loading or the exposure of sensitive information. Always convert Entities to DTOs before responding.
-* **Mixing Legacy Packages:** Be extremely careful not to accidentally import `javax.validation` via IDE auto-completion when writing validation annotations.
+* **Returning Entities Directly:** Returning JPA Entities directly from the Controller causes severe side effects such as runtime errors (`LazyInitializationException`), circular references, and exposure of sensitive information. Always convert them to DTOs before responding.
+* **Mixing Legacy Packages:** Be extremely careful not to accidentally import `javax.validation` using IDE auto-completion when writing validation annotations.
 
 ## Related Skills
 
-* `spring-jpa-entity-design`: Use this first to design the foundational database schema and entities before implementing the API.
-* `spring-querydsl`: Use this by injecting it into the Service layer when custom repository queries are needed for complex search conditions or resolving N+1 problems.
+* `spring-jpa-entity-design`: Use first to design the foundational database schema and entities before implementing the API.
+* `spring-boot-querydsl`: Inject into the Service layer when complex search conditions or pagination are needed.
+* `spring-rest-api-exception-handler`: Use to globally handle validation failures (`@Valid`) or business exceptions that occur outside the controller logic and return consistent error response DTOs.
