@@ -128,4 +128,4 @@ public class Document extends BaseEntity {
 ## Related Skills
 
 * `spring-rest-api`: Use this skill next to implement controllers and core business logic based on the designed entities.
-* `spring-querydsl`: Use to solve N+1 problems using `fetchJoin()` or to write complex dynamic queries.
+* `spring-boot-querydsl`: Use to solve N+1 problems using `fetchJoin()` or to write complex dynamic queries.
