@@ -129,6 +129,6 @@ public class DocumentController {
 
 ## Related Skills
 
-* `spring-jpa-entity-design`: Use first to design the foundational database schema and entities before implementing the API.
+* `spring-boot-jpa-entity`: Use first to design the foundational database schema and entities before implementing the API.
 * `spring-boot-querydsl`: Inject into the Service layer when complex search conditions or pagination are needed.
 * `spring-rest-api-exception-handler`: Use to globally handle validation failures (`@Valid`) or business exceptions that occur outside the controller logic and return consistent error response DTOs.
