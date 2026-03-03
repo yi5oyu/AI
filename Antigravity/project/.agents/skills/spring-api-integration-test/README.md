@@ -1,5 +1,5 @@
 ---
-name: spring-api-integration-test
+name: spring-rest-api-integration-test
 description: Spring Boot REST API의 전체 계층(Controller-Service-Repository)과 데이터베이스를 연결하여 검증하는 통합 테스트를 작성합니다.
 argument-hint: "[테스트할 컨트롤러/메서드 및 시나리오 (예: DocumentController 문서 생성 및 DB 저장 통합 테스트)]"
 source: "custom"
