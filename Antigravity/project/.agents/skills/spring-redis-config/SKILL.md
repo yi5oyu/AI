@@ -45,8 +45,6 @@ Create a `@Configuration` class and register `LettuceConnectionFactory` as a Bea
 
 Register template objects for data manipulation as Beans.
 
-
-
 - **`StringRedisTemplate`:** Used when both Key and Value are strings (e.g., JWT Refresh Tokens). (Spring Boot's auto-configuration provides this out of the box, but it can be explicitly defined if custom connection factories are used).
 - **`RedisTemplate<String, Object>`:** Configured to save Java objects in JSON format.
   - Key Serialization: Use `StringRedisSerializer`.
