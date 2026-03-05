@@ -1,7 +1,7 @@
 ---
 name: spring-security-rest-api
 description: Configure global security settings (SecurityFilterChain), CORS, and access control for a Stateless REST API in a Java 21 and Spring Boot 3.x+ (Spring Security 6.x+) environment.
-argument-hint: "[허용(Permit)할 API 엔드포인트 목록, CORS 허용 도메인, 추가할 커스텀 필터 (예: API 보안 설정하고 Swagger 및 회원가입 경로는 모두 허용해 줘)]"
+argument-hint: "[허용(Permit)할 API 엔드포인트 목록, CORS 허용 도메인, 추가할 커스텀 필터 (예: API 보안 설정하고 Swagger 및 회원가입 경로는 모두 허용)]"
 source: "custom"
 tags: ["java", "spring-boot", "security", "backend", "architecture", "cors", "java21"]
 triggers:
