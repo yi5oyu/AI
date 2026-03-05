@@ -49,8 +49,6 @@ Configure permissions per endpoint via `authorizeHttpRequests()`.
 
 Insert the separately implemented JWT token verification filter before the default form login authentication filter location using `addFilterBefore(customFilter, UsernamePasswordAuthenticationFilter.class)`.
 
-
-
 ## Examples
 
 ```java
