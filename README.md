@@ -111,7 +111,7 @@ LLM이 최신 정보나 특정 도메인 지식을 반영한 정확하고 신뢰
 
 방대한 양의 텍스트 데이터를 학습하여 다양한 종류의 텍스트를 생성할 수 있음  
 
-### RAG(Retrieval-Augmented Generation): 검색 증강 생성  
+### [RAG(Retrieval-Augmented Generation): 검색 증강 생성](https://github.com/yi5oyu/AI/blob/main/RAG.md)  
 
 `학습한 데이터안에서 답변하는 LLM의 한계를 극복하기 위해 응답을 생성하기 외부 자료를 검색해 답변의 품질과 신뢰도를 높이는 AI 프레임워크`
 
